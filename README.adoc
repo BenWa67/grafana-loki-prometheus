@@ -1,0 +1,7 @@
+# Summary
+
+## <<grafana/README.adoc,1. grafana installation and configuration>>
+
+## <<loki/README.adoc,2. loki installation and configuration>>
+
+## <<prometheus/README.adoc,3. prometheus configuration>>
