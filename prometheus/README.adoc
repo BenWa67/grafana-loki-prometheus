@@ -1,0 +1,27 @@
+
+## Configure grafana to have Prometheus as datasource
+Open http://localhost:3000 in a browser, log in, and go to Configuration — Data Sources :
+
+image::images/datasources.png[]
+
+Click on add datasource, choose Prometheus on the list
+
+image::images/loki-datasources.png[]
+
+Add Prometheus as name and specify http://prometheus.loki.svc.cluster.local:9090/ in the URL
+
+image::images/prometheus-configuration.png[]
+
+Save and test , you should have a similar text 
+
+image::images/prometheus-saveandtest.png[]
+
+## Look at Metrics
+
+Go to Explore, select Loki from the top, and check the logs by doing a query. Click on query button:
+
+
+## Uninstall prometheus
+```bash
+helm uninstall prometheus -n loki
+```

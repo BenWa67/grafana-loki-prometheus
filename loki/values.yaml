@@ -1,0 +1,69 @@
+
+minio:
+  enabled: false
+loki:
+  auth_enabled: false
+  storage:
+    type: "s3"
+    s3:
+      region: us-east-1
+      s3: loki-s3
+      s3ForcePathStyle: false
+      insecure: false
+    bucketNames:
+      chunks: loki-s3
+      ruler: loki-s3
+      admin: loki-s3
+  schema_config:
+      configs:
+      - from: 2022-01-11
+        store: boltdb-shipper
+        object_store: s3
+        schema: v12
+        index:
+          prefix: loki_index_
+          period: 24h
+  compactor:
+        retention_enabled: true
+        shared_store: s3
+  storage_config:
+    aws:
+      s3: s3://us-east-1/loki-s3
+      insecure: false
+      s3forcepathstyle: true
+    boltdb_shipper:
+      active_index_directory: /var/loki/index
+      shared_store: s3
+  rulerConfig:
+    storage:
+      type: local
+      local:
+        directory: /var/loki/rules
+# tag::serviceaccount[]
+serviceAccount:
+  annotations:
+    "eks.amazonaws.com/role-arn": "arn:aws:iam::XXXXXXXX:role/test-role-loki"
+# end::serviceaccount[]
+write:
+  replicas: 2
+    
+read:
+  replicas: 1
+
+test:
+  enabled: false
+monitoring:
+  dashboards:
+    enabled: true
+  rules:
+    enabled: false
+  alerts:
+    enabled: false
+  serviceMonitor:
+    enabled: false
+  selfMonitoring:
+    enabled: false
+    grafanaAgent:
+      installOperator: false
+  lokiCanary:
+    enabled: false

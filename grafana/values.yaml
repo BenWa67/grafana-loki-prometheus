@@ -1,0 +1,19 @@
+persistence:
+  enabled: true
+grafana.ini:
+  smtp:
+    enabled: true
+    host: email-smtp.us-east-1.amazonaws.com:587
+    user: user
+    password: 'something'
+    skip_verify: true
+    from_address: benoit.walser@gmail.com
+    from_name: Grafana
+smtp:
+  enabled: true
+  host: email-smtp.us-east-1.amazonaws.com:587
+  userKey: user
+  passwordKey: 'something'
+  skip_verify: true
+  from_address: benoit.walser@gmail.com
+  from_name: Grafana
